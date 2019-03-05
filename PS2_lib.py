@@ -128,7 +128,7 @@ class PS2Gamepad:
         time.sleep_ms(10)
 
     # set vibration value
-    def setVibValue(self, WW, YY):
+    def setVibValue(self, WW=-1, YY=-1):
         self.clearSendBuf()
         self.clearDataBuf()
         if 0x00 <= WW <= 0xFF:
