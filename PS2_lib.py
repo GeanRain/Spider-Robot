@@ -128,13 +128,13 @@ class PS2Gamepad:
         time.sleep_ms(10)
 
     # set vibration value
-    def setVibValue(self, WW=-1, YY=-1):
+    def setVibValue(self, small=-1, big=-1):
         self.clearSendBuf()
         self.clearDataBuf()
-        if 0x00 <= WW <= 0xFF:
-            self.__vibValue[0] = WW
-        if 0x40 <= YY <= 0xFF:
-            self.__vibValue[1] = YY
+        if 0x00 <= small <= 0xFF:
+            self.__vibValue[0] = small
+        if 0x40 <= big <= 0xFF:
+            self.__vibValue[1] = big
         self.__ready2send()
         self.cmdWithPad()
         self.__endOfsend()
@@ -180,10 +180,10 @@ def main():
     ps2 = PS2Gamepad(freq=1000000, dat='X1', cmd='X2', cs='X3', clk='X4')
     input("please enter to start debug")
     ps2.setConfig()
-    ps2.setAnalogMode(red=True, lock=True)
     ps2.setVibMode(vibration=True)
+    ps2.setAnalogMode(red=True, lock=True)
     ps2.setConfig()
-    ps2.setVibValue(0xFF, 0xFF)
+    ps2.setVibValue(big=0xFF)
     while(True):
         btn = ps2.getBtn()
         if btn:
